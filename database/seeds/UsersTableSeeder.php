@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
             'cpf' => '12312312312',
             'phone' => '82 999999999',
             'status' => 'Não Validado',
+            'created_at' => now()->format('Y-m-d H:i:s'),
             'skill_id' => 1
         ]);
     }

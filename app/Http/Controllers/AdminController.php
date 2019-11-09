@@ -89,4 +89,21 @@ class AdminController extends Controller
         $admin = Admin::destroy($id);
         return $admin;
     }
+
+    public function auth(Request $request) {
+        $admin = Admin::where('login', $request->login);
+
+        if(count($admin) > 0) {
+            $result = Admin::where('login', $request->login)->where('password', $request->password);
+            if(count($result) > 0) {
+                return $result->get();
+            } else {
+                return "Login ou senha incorreta";
+            }
+        } else {
+            return "Login não existe.";
+        }
+
+        
+    }
 }

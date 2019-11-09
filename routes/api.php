@@ -35,4 +35,5 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
     Route::post('admin', 'AdminController@store');
     Route::put('admin/{id}', 'AdminController@update');
     Route::delete('admin/{id}', 'AdminController@destroy');
+    Route::post('admin/session', 'AdminController@auth');
 });

@@ -91,19 +91,23 @@ class AdminController extends Controller
     }
 
     public function auth(Request $request) {
-        $admin = Admin::where('login', $request->login);
 
-        if(count($admin) > 0) {
-            $result = Admin::where('login', $request->login)->where('password', $request->password);
-            if(count($result) > 0) {
-                return $result->get();
+        $login = $request->input('login');
+        $password = $request->input('password');
+
+        if(!is_null($login) && !is_null($password)) {
+
+            $admin = Admin::where('login', $login)->where('password', $password);
+
+            if(count($admin->get()) > 0) {
+                return $admin->get();
             } else {
-                return "Login ou senha incorreta";
+                return "Login ou senha inválida.";
             }
+
         } else {
-            return "Login não existe.";
+            return "Preencha os campos.";
         }
 
-        
     }
 }

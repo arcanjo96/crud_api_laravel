@@ -38,6 +38,10 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = $request->all();
+        $cpfExists = User::where('cpf', $user["cpf"]);
+        if(count($cpfExists->get()) > 0) {
+            return "Cpf já existe.";
+        }
         $result = User::create($user);
         return $result;
     }
@@ -75,7 +79,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = $request->all();
-        $result = User::where('id', $id)->update($user);
+        $result = User::where('id', $id)->update(['status' => 'Validado']);
         return $result;
     }
 
